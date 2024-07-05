@@ -68,15 +68,22 @@ function Header() {
 }
 
 function Menu() {
+  const pizzas = pizzaData;
+
+  // const pizzas = [];
+  const numPizzas = pizzas.length;
+
   return (
     <main className='menu'>
       <h2>Our Menu </h2>
-
-      <ul className='pizzas'>
-        {pizzaData.map((pizza) => (
-          <Pizza pizzaObj={pizza} key={pizza.name} />
-        ))}
-      </ul>
+      {numPizzas > 0 && (
+        //
+        <ul className='pizzas'>
+          {pizzas.map((pizza) => (
+            <Pizza pizzaObj={pizza} key={pizza.name} />
+          ))}
+        </ul>
+      )}
 
       {/* <Pizza
         name='Pizza Spinaci'
@@ -113,14 +120,21 @@ function Footer() {
   const openHour = 12;
   const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
-  //   console.log(isOpen);
+  console.log(isOpen);
 
   //   if (hour >= openHour && hour <= closeHour) alert('We are currently open!');
   //   else alert('Sorry, We are closed!');
+
   return (
     <footer className='footer'>
-      {' '}
-      {new Date().toLocaleTimeString()}. We are currently open!
+      {isOpen && (
+        <div className='order'>
+          <p>
+            We are open until {closeHour}:00. Come visit us or order online.
+          </p>
+          <button className='btn'>ORDER NOW</button>
+        </div>
+      )}
     </footer>
   );
   //   return React.createElement('footer', null, '© 2021 Fast React Pizza Co.');
